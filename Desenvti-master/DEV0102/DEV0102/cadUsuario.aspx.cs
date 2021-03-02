@@ -14,8 +14,24 @@ namespace DEV0102
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+         
+            if (Request.ServerVariables["QUERY_STRING"].Contains("novousuario"))
+            {
+                PanelUsuariosCadastrados.Visible = false;
+            }
+            
+            else
+            {
+                if (Session["codigousuario"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                PanelUsuariosCadastrados.Visible = true;
+            }
+        
         }
+
+        
 
         protected void btnConsultaCEP_Click(object sender, EventArgs e)
         {
@@ -163,5 +179,20 @@ namespace DEV0102
                 ExibirMensagem("Liberado para edição!");
             }
         }
+               
+        protected void bntAtualizar_Click1(object sender, EventArgs e)
+        {
+            List<tabUsuario> objListUsuario = new List<tabUsuario>();
+            usuarioDAL uDal = new usuarioDAL();
+            objListUsuario = uDal.listarTodosUsuarios();
+            foreach (tabUsuario objU in objListUsuario)
+                
+            {
+                ExibirMensagem(objU.nome);
+            }
+
+           
+        }
     }
+
 }

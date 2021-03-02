@@ -30,9 +30,12 @@ namespace DEV0102
             }
             else
             {
+                Session.Add("codigousuario", objUsuario.codigo);
                 Response.Redirect("cadUsuario.aspx");
             }
+           
         }
+
 
         public void ExibirAlerta(string varmsg)
         {
@@ -57,6 +60,11 @@ namespace DEV0102
                 ExibirAlerta("Email enviado, verifique sua caixa de entrada");
             }
 
+        }
+
+        protected void btnCadastrar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("cadUsuario.aspx?novousuario=ok");
         }
     }
 }
